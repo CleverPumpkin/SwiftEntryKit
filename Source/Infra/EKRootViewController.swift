@@ -82,7 +82,7 @@ class EKRootViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if [previousStatusBar, statusBar].contains(.ignored) {
-            return super.preferredStatusBarStyle
+            return overrideStatusBarStyle ?? super.preferredStatusBarStyle
         }
         return statusBar?.appearance.style ?? previousStatusBar.appearance.style
     }
@@ -92,6 +92,12 @@ class EKRootViewController: UIViewController {
             return super.prefersStatusBarHidden
         }
         return !(statusBar?.appearance.visible ?? previousStatusBar.appearance.visible)
+    }
+    
+    var overrideStatusBarStyle: UIStatusBarStyle? {
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
     }
     
     // MARK: - Lifecycle
@@ -265,4 +271,3 @@ extension EKRootViewController: EntryContentViewDelegate {
         }
     }
 }
-

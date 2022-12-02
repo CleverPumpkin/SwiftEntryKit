@@ -167,4 +167,21 @@ public final class SwiftEntryKit {
             }
         }
     }
+    
+    /**
+     Override status bar style.
+     - Works only with StatusBar.ignored
+     - In case you viewController based statusBar. 
+     - A thread-safe method - Can be invoked from any thread.
+     - A class method - Should be called on the class.
+     */
+    public class func overrideStatusBarStyle(with style: UIStatusBarStyle) {
+        if Thread.isMainThread {
+            EKWindowProvider.shared.overrideStatusBarStyle = style
+        } else {
+            DispatchQueue.main.async {
+                EKWindowProvider.shared.overrideStatusBarStyle = style
+            }
+        }
+    }
 }

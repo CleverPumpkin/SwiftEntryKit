@@ -54,6 +54,12 @@ final class EKWindowProvider: EntryPresenterDelegate {
         }
     }
     
+    var overrideStatusBarStyle: UIStatusBarStyle? {
+        didSet {
+            rootVC?.overrideStatusBarStyle = overrideStatusBarStyle
+        }
+    }
+    
     // MARK: - Setup and Teardown methods
     
     // Prepare the window and the host view controller
@@ -84,6 +90,9 @@ final class EKWindowProvider: EntryPresenterDelegate {
         } else {
             entryVC = rootVC!
         }
+        
+        entryVC.overrideStatusBarStyle = overrideStatusBarStyle
+        
         return entryVC
     }
     
