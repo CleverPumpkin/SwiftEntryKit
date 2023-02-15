@@ -91,6 +91,17 @@ final class EKWindowProvider: EntryPresenterDelegate {
             entryVC = rootVC!
         }
         
+        switch rollbackWindow {
+        case .main:
+            if let screen = mainRollbackWindow?.screen {
+                entryWindow.screen = screen
+            }
+        case let .custom(window):
+            entryWindow.screen = window.screen
+        default:
+            break
+        }
+        
         entryVC.overrideStatusBarStyle = overrideStatusBarStyle
         
         return entryVC
